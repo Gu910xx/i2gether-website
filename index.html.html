@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Independent Together — Supporting Young People Into Independent Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #152338;
+    --teal: #1a6b5c;
+    --teal-light: #2a9d82;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --cream: #f5f1eb;
+    --warm-white: #faf8f4;
+    --text-dark: #0d1b2a;
+    --text-mid: #3a4a5c;
+    --text-light: #7a8a9a;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 6%;
+    height: 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: transparent;
+    transition: background 0.5s, backdrop-filter 0.5s, box-shadow 0.5s;
+  }
+  nav.scrolled {
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+  }
+  nav.scrolled .nav-logo { color: var(--navy); }
+  nav.scrolled .nav-logo span { color: var(--teal); }
+  nav.scrolled .nav-links a { color: var(--text-mid); }
+  nav.scrolled .nav-links a:hover { color: var(--teal); }
+  nav.scrolled .nav-cta { background: var(--navy); color: #fff !important; }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-logo span { color: var(--gold); transition: color 0.3s; }
+  .nav-links { display: flex; gap: 40px; align-items: center; }
+  .nav-links a {
+    color: rgba(255,255,255,0.9);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 12px 26px;
+    border-radius: 0;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative; height: 100vh; min-height: 620px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-video-wrap {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero-video-wrap video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.22) 50%,
+      rgba(0,0,0,0.35) 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 20px;
+    max-width: 1000px;
+    animation: heroFadeUp 1.4s ease forwards;
+  }
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 8vw, 108px);
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 28px;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+  }
+  .hero-title em { font-style: italic; color: #fff; }
+  .hero-sub {
+    font-size: clamp(15px, 1.6vw, 19px);
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 44px;
+    letter-spacing: 0.02em;
+  }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: #fff;
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 18px 44px; border: none;
+    border-radius: 0; cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 17px 44px;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0; cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+    display: block;
+  }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* ─── SECTION BASE ─── */
+  section { position: relative; }
+  .section-pad { padding: 130px 6%; }
+  .section-pad-sm { padding: 90px 6%; }
+
+  .label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 16px; display: block;
+  }
+  .heading-xl {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--text-dark);
+  }
+  .heading-xl em { font-style: italic; color: var(--teal); }
+  .heading-lg {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    line-height: 1.15; letter-spacing: -0.02em;
+    color: var(--text-dark);
+  }
+  .body-text { font-size: 17px; line-height: 1.75; color: var(--text-mid); font-weight: 300; }
+  .body-text-sm { font-size: 15px; line-height: 1.7; color: var(--text-mid); font-weight: 300; }
+
+  /* ─── INTRO SECTION ─── */
+  #intro { background: var(--navy); }
+  .intro-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .intro-left .heading-xl { color: #fff; }
+  .intro-left .heading-xl em { color: var(--gold-light); }
+  .intro-left .label { color: var(--gold); }
+  .intro-right .body-text { color: rgba(255,255,255,0.7); }
+  .gold-line { width: 60px; height: 2px; background: var(--gold); margin: 28px 0; }
+
+  /* ─── CAROUSEL ─── */
+  #services { background: var(--cream); overflow: hidden; }
+  .carousel-header {
+    max-width: 1200px; margin: 0 auto 50px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .carousel-track-wrap { overflow: hidden; }
+  .carousel-track {
+    display: flex; gap: 28px;
+    padding: 0 5% 0;
+    animation: carouselScroll 30s linear infinite;
+    width: max-content;
+  }
+  .carousel-track:hover { animation-play-state: paused; }
+  @keyframes carouselScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .service-card {
+    min-width: 340px; max-width: 340px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(13,27,42,0.08);
+    flex-shrink: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(13,27,42,0.14); }
+  .service-card-img {
+    width: 100%; height: 220px; object-fit: cover;
+    display: block;
+  }
+  .service-card-body { padding: 28px; }
+  .service-card-num { font-size: 11px; font-weight: 600; color: var(--teal-light); letter-spacing: 0.15em; display: block; margin-bottom: 10px; }
+  .service-card-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text-dark); margin-bottom: 12px; }
+  .service-card-text { font-size: 14px; line-height: 1.7; color: var(--text-mid); }
+  .teal-bar { height: 3px; background: linear-gradient(90deg, var(--teal), var(--teal-light)); width: 0; transition: width 0.4s; }
+  .service-card:hover .teal-bar { width: 100%; }
+
+  /* ─── STATS ─── */
+  #stats { background: var(--teal); }
+  .stats-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: flex; justify-content: space-around; align-items: center;
+    flex-wrap: wrap; gap: 48px;
+    text-align: center;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 8vw, 90px);
+    color: #fff; line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .stat-num span { color: var(--gold-light); }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 8px; }
+  .stat-divider { width: 1px; height: 80px; background: rgba(255,255,255,0.2); }
+
+  /* ─── TIMELINE ─── */
+  #pathway { background: var(--warm-white); }
+  .pathway-inner { max-width: 1100px; margin: 0 auto; }
+  .pathway-header { text-align: center; margin-bottom: 64px; }
+  .timeline {
+    display: flex; gap: 0; position: relative;
+    justify-content: space-between;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; top: 36px; left: 10%; right: 10%;
+    height: 1px; background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+  }
+  .timeline-step { flex: 1; text-align: center; position: relative; padding: 0 12px; }
+  .timeline-dot {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 22px;
+    box-shadow: 0 4px 20px rgba(26,107,92,0.15);
+    position: relative; z-index: 1;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .timeline-step:hover .timeline-dot { background: var(--teal); transform: scale(1.1); }
+  .timeline-step-num {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+    color: var(--teal); text-transform: uppercase; margin-bottom: 8px; display: block;
+  }
+  .timeline-step-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--text-dark); margin-bottom: 8px; }
+  .timeline-step-text { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* ─── APPROACH CARDS ─── */
+  #approach { background: var(--navy); }
+  .approach-inner { max-width: 1200px; margin: 0 auto; }
+  .approach-header { text-align: center; margin-bottom: 60px; }
+  .approach-header .heading-xl { color: #fff; }
+  .approach-header .label { color: var(--gold); }
+  .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .approach-card {
+    background: var(--navy-mid);
+    padding: 52px 40px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .approach-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .approach-card:hover { background: #1c2e42; }
+  .approach-card:hover::before { transform: scaleX(1); }
+  .approach-icon { font-size: 36px; margin-bottom: 24px; display: block; }
+  .approach-card-title { font-family: 'DM Serif Display', serif; font-size: 26px; color: #fff; margin-bottom: 16px; }
+  .approach-card-text { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.6); }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--cream); overflow: hidden; }
+  .test-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+  .test-track-wrap { overflow: hidden; }
+  .test-track {
+    display: flex; gap: 28px; width: max-content;
+    animation: testScroll 25s linear infinite;
+    padding-bottom: 8px;
+  }
+  .test-track:hover { animation-play-state: paused; }
+  @keyframes testScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .test-card {
+    min-width: 380px;
+    background: #fff; border-radius: 4px;
+    padding: 36px 36px 32px;
+    box-shadow: 0 2px 20px rgba(13,27,42,0.06);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .test-quote { font-size: 48px; line-height: 0.5; color: var(--teal-light); font-family: 'DM Serif Display', serif; margin-bottom: 16px; display: block; }
+  .test-text { font-family: 'DM Serif Display', serif; font-size: 19px; line-height: 1.55; color: var(--text-dark); font-style: italic; margin-bottom: 24px; }
+  .test-author { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); }
+
+  /* ─── IMPACT ─── */
+  #impact { background: var(--warm-white); }
+  .impact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .impact-list { display: flex; flex-direction: column; gap: 0; }
+  .impact-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+  }
+  .impact-item:first-child { border-top: 1px solid var(--border); }
+  .impact-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 7px; }
+  .impact-item-text { font-size: 16px; color: var(--text-mid); line-height: 1.6; }
+  .impact-visual {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+    border-radius: 4px; padding: 52px 40px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .impact-visual::before {
+    content: '';
+    position: absolute; top: -40%; right: -20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+  }
+  .impact-visual-num { font-family: 'DM Serif Display', serif; font-size: 88px; line-height: 1; color: #fff; letter-spacing: -0.04em; }
+  .impact-visual-num span { color: var(--gold-light); }
+  .impact-visual-label { font-size: 14px; color: rgba(255,255,255,0.65); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; }
+  .impact-visual-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 6px; }
+
+  /* ─── SAFEGUARDING ─── */
+  #safeguarding { background: var(--navy-mid); }
+  .safe-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+  .safe-inner .heading-lg { color: #fff; margin-bottom: 20px; }
+  .safe-inner .label { color: var(--gold); }
+  .safe-inner .body-text { color: rgba(255,255,255,0.6); max-width: 640px; margin: 0 auto 48px; }
+  .safe-pills { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+  .safe-pill {
+    border: 1px solid rgba(201,168,76,0.3);
+    color: rgba(255,255,255,0.8);
+    font-size: 13px; font-weight: 500;
+    padding: 10px 22px; border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── CTA ─── */
+  #cta {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
+    position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; top: -30%; right: -10%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(201,168,76,0.08);
+  }
+  .cta-inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .cta-inner .heading-xl { color: #fff; margin-bottom: 20px; }
+  .cta-inner .heading-xl em { color: var(--gold-light); }
+  .cta-inner .label { color: rgba(255,255,255,0.6); }
+  .cta-inner p { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; font-weight: 300; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 56px 5% 36px;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .nav-logo { font-size: 20px; display: block; margin-bottom: 16px; }
+  .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+  .footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: rgba(255,255,255,0.9); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: rgba(255,255,255,0.3);
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .intro-inner { grid-template-columns: 1fr; gap: 40px; }
+    .approach-grid { grid-template-columns: 1fr; gap: 2px; }
+    .impact-inner { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .timeline { flex-direction: column; gap: 32px; }
+    .timeline::before { display: none; }
+    .stat-divider { display: none; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">i2<span>gether</span></a>
+  <div class="nav-links">
+    <a href="#intro">About</a>
+    <a href="#services">Services</a>
+    <a href="#pathway">How We Work</a>
+    <a href="#testimonials">Stories</a>
+    <a href="#cta" class="nav-cta">Make a Referral</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-video-wrap">
+    <!-- Two video elements that crossfade for invisible transitions -->
+    <video id="videoA" autoplay muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:1;transition:opacity 1.2s ease;"></video>
+    <video id="videoB" muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1.2s ease;"></video>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      Supporting young people<br>into <em>independent living.</em>
+    </h1>
+    <p class="hero-sub">Safe accommodation. Personalised support. Real futures.</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-primary">Make a Referral</a>
+      <a href="#intro" class="btn-ghost">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- INTRO -->
+<section id="intro" class="section-pad">
+  <div class="intro-inner">
+    <div class="intro-left reveal">
+      <span class="label">Who We Are</span>
+      <h2 class="heading-xl">Our Homes.<br>Our Support.<br><em>Their Future.</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="intro-right reveal reveal-delay-2">
+      <p class="body-text">More than accommodation — a pathway to independence.</p>
+      <br>
+      <p class="body-text">Independent Together provides safe, supported accommodation and personalised guidance for young people across Greater Manchester, helping them build the confidence, skills, and stability needed for adult life.</p>
+      <br><br>
+      <a href="#services" class="btn-primary" style="background:var(--gold);color:var(--navy);">Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- CAROUSEL -->
+<section id="services" class="section-pad">
+  <div class="carousel-header reveal">
+    <div>
+      <span class="label">What We Offer</span>
+      <h2 class="heading-lg">Built Around <em style="font-style:italic;color:var(--teal);">Every</em> Young Person</h2>
+    </div>
+  </div>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track">
+      <!-- Cards x2 for seamless loop -->
+      <!-- CARD 1 -->
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/7614610/pexels-photo-7614610.jpeg?auto=compress&w=680" alt="Supported Accommodation" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">01 — Homes</span>
+          <h3 class="service-card-title">Supported Accommodation</h3>
+          <p class="service-card-text">Safe, well-managed homes designed to give young people stability, structure, and a foundation to grow.</p>
+        </div>
+      </div>
+      <!-- CARD 2 -->
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/8064907/pexels-photo-8064907.jpeg?auto=compress&w=680" alt="Life Skills" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">02 — Skills</span>
+          <h3 class="service-card-title">Life Skills Development</h3>
+          <p class="service-card-text">We help young people build essential skills — cooking, budgeting, and daily routines for independent living.</p>
+        </div>
+      </div>
+      <!-- CARD 3 -->
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/10505928/pexels-photo-10505928.jpeg?auto=compress&w=680" alt="Personalised Support" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">03 — Support</span>
+          <h3 class="service-card-title">Personalised Support</h3>
+          <p class="service-card-text">Dedicated support workers provide consistent guidance, mentoring, and emotional support every step of the way.</p>
+        </div>
+      </div>
+      <!-- CARD 4 -->
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/23893324/pexels-photo-23893324.jpeg?auto=compress&w=680" alt="Pathway to Independence" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">04 — Future</span>
+          <h3 class="service-card-title">Pathway to Independence</h3>
+          <p class="service-card-text">We support young people into education, employment, and confident independent living.</p>
+        </div>
+      </div>
+      <!-- CARD 5 -->
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&w=680" alt="Safe Homes" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">05 — Community</span>
+          <h3 class="service-card-title">Safe, Welcoming Homes</h3>
+          <p class="service-card-text">Every property is carefully chosen and managed to feel like a real home — not a facility.</p>
+        </div>
+      </div>
+      <!-- Duplicate for loop -->
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/7614610/pexels-photo-7614610.jpeg?auto=compress&w=680" alt="Supported Accommodation" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">01 — Homes</span>
+          <h3 class="service-card-title">Supported Accommodation</h3>
+          <p class="service-card-text">Safe, well-managed homes designed to give young people stability, structure, and a foundation to grow.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/8064907/pexels-photo-8064907.jpeg?auto=compress&w=680" alt="Life Skills" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">02 — Skills</span>
+          <h3 class="service-card-title">Life Skills Development</h3>
+          <p class="service-card-text">We help young people build essential skills — cooking, budgeting, and daily routines for independent living.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/10505928/pexels-photo-10505928.jpeg?auto=compress&w=680" alt="Personalised Support" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">03 — Support</span>
+          <h3 class="service-card-title">Personalised Support</h3>
+          <p class="service-card-text">Dedicated support workers provide consistent guidance, mentoring, and emotional support every step of the way.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/23893324/pexels-photo-23893324.jpeg?auto=compress&w=680" alt="Pathway" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">04 — Future</span>
+          <h3 class="service-card-title">Pathway to Independence</h3>
+          <p class="service-card-text">We support young people into education, employment, and confident independent living.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="teal-bar"></div>
+        <img class="service-card-img" src="https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&w=680" alt="Safe Homes" loading="lazy">
+        <div class="service-card-body">
+          <span class="service-card-num">05 — Community</span>
+          <h3 class="service-card-title">Safe, Welcoming Homes</h3>
+          <p class="service-card-text">Every property is carefully chosen and managed to feel like a real home — not a facility.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats" class="section-pad-sm">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">30<span>+</span></div>
+      <div class="stat-label">Young Persons Supported</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-num">8<span>+</span></div>
+      <div class="stat-label">Homes</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-num">8<span>+</span></div>
+      <div class="stat-label">Local Authorities</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item reveal reveal-delay-4">
+      <div class="stat-num" style="font-size:clamp(32px,4vw,52px);letter-spacing:-0.02em;">Greater<br>Manchester</div>
+      <div class="stat-label">Based</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="pathway" class="section-pad">
+  <div class="pathway-inner">
+    <div class="pathway-header reveal">
+      <span class="label">How We Work</span>
+      <h2 class="heading-xl" style="margin-bottom:12px;">A clear pathway from<br><em>referral to independence.</em></h2>
+    </div>
+    <div class="timeline reveal reveal-delay-1">
+      <div class="timeline-step">
+        <div class="timeline-dot">📋</div>
+        <span class="timeline-step-num">Step 01</span>
+        <h4 class="timeline-step-title">Referral Received</h4>
+        <p class="timeline-step-text">We review every referral carefully and respond fast.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">🏠</div>
+        <span class="timeline-step-num">Step 02</span>
+        <h4 class="timeline-step-title">Safe Placement</h4>
+        <p class="timeline-step-text">Matched to the right home for their needs.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">📝</div>
+        <span class="timeline-step-num">Step 03</span>
+        <h4 class="timeline-step-title">Support Plan</h4>
+        <p class="timeline-step-text">A personal plan built around their goals.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">📈</div>
+        <span class="timeline-step-num">Step 04</span>
+        <h4 class="timeline-step-title">Ongoing Development</h4>
+        <p class="timeline-step-text">Regular reviews, skills building, mentoring.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">🌟</div>
+        <span class="timeline-step-num">Step 05</span>
+        <h4 class="timeline-step-title">Independence</h4>
+        <p class="timeline-step-text">Move-on ready. Confident. Equipped for life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" class="section-pad">
+  <div class="approach-inner">
+    <div class="approach-header reveal">
+      <span class="label">Our Philosophy</span>
+      <h2 class="heading-xl" style="color:#fff;">Three pillars.<br><em style="color:var(--gold-light);">One purpose.</em></h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card reveal">
+        <span class="approach-icon">🏡</span>
+        <h3 class="approach-card-title">Stability</h3>
+        <p class="approach-card-text">Safe homes and structured environments that give young people the foundation to grow from.</p>
+      </div>
+      <div class="approach-card reveal reveal-delay-2">
+        <span class="approach-icon">🤝</span>
+        <h3 class="approach-card-title">Support</h3>
+        <p class="approach-card-text">Trusted relationships and consistent guidance from people who genuinely care about their future.</p>
+      </div>
+      <div class="approach-card reveal reveal-delay-3">
+        <span class="approach-icon">🚀</span>
+        <h3 class="approach-card-title">Progression</h3>
+        <p class="approach-card-text">Real skills, growing confidence, and a clear route into education, work, and independent life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section-pad">
+  <div class="test-header reveal">
+    <span class="label">Real Stories</span>
+    <h2 class="heading-xl">Real Stories.<br><em>Real Change.</em></h2>
+  </div>
+  <div class="test-track-wrap">
+    <div class="test-track">
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">I didn't know how to live on my own before. Now I feel ready for anything.</p>
+        <span class="test-author">Young Person, Manchester</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">The support helped me build confidence and actually focus on my future.</p>
+        <span class="test-author">Care Leaver, 19</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">This gave me stability when I needed it most. I'll always be grateful.</p>
+        <span class="test-author">Young Person, Salford</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">My key worker believed in me even when I didn't. That changed everything.</p>
+        <span class="test-author">Care Leaver, 21</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">I learned to cook, budget, and actually enjoy looking after myself.</p>
+        <span class="test-author">Young Person, Oldham</span>
+      </div>
+      <!-- Duplicates -->
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">I didn't know how to live on my own before. Now I feel ready for anything.</p>
+        <span class="test-author">Young Person, Manchester</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">The support helped me build confidence and actually focus on my future.</p>
+        <span class="test-author">Care Leaver, 19</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">This gave me stability when I needed it most. I'll always be grateful.</p>
+        <span class="test-author">Young Person, Salford</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">My key worker believed in me even when I didn't. That changed everything.</p>
+        <span class="test-author">Care Leaver, 21</span>
+      </div>
+      <div class="test-card">
+        <span class="test-quote">"</span>
+        <p class="test-text">I learned to cook, budget, and actually enjoy looking after myself.</p>
+        <span class="test-author">Young Person, Oldham</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="section-pad">
+  <div class="impact-inner">
+    <div class="impact-left reveal">
+      <span class="label">Our Impact</span>
+      <h2 class="heading-xl" style="margin-bottom:36px;">Measurable support.<br><em>Meaningful outcomes.</em></h2>
+      <div class="impact-list">
+        <div class="impact-item">
+          <div class="impact-dot"></div>
+          <p class="impact-item-text">Young people progressing into confident independence</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-dot"></div>
+          <p class="impact-item-text">Improved life skills across cooking, budgeting and wellbeing</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-dot"></div>
+          <p class="impact-item-text">Active engagement in education and employment pathways</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-dot"></div>
+          <p class="impact-item-text">Stable, long-term placements with low breakdown rates</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-dot"></div>
+          <p class="impact-item-text">Trusted by 23+ local authorities across Greater Manchester</p>
+        </div>
+      </div>
+    </div>
+    <div class="impact-right reveal reveal-delay-2">
+      <div class="impact-visual">
+        <div class="impact-visual-num">30<span>+</span></div>
+        <div class="impact-visual-label">Young People Supported</div>
+        <div class="impact-visual-sub">and growing every year</div>
+        <br><br>
+        <div class="impact-visual-num" style="font-size:60px;">8<span>+</span></div>
+        <div class="impact-visual-label">Local Authority Partners</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFEGUARDING -->
+<section id="safeguarding" class="section-pad-sm">
+  <div class="safe-inner">
+    <span class="label">Trust & Safety</span>
+    <h2 class="heading-lg">Safe, professional,<br>accountable support.</h2>
+    <br>
+    <p class="body-text">Every member of our team is trained, DBS checked, and committed to the safety, dignity, and wellbeing of every young person in our care. We work in close partnership with local authorities and follow robust safeguarding protocols at every step.</p>
+    <br><br>
+    <div class="safe-pills">
+      <span class="safe-pill">✓ DBS Checked Staff</span>
+      <span class="safe-pill">✓ Robust Safeguarding</span>
+      <span class="safe-pill">✓ Individual Support Plans</span>
+      <span class="safe-pill">✓ 24/7 On-Call Support</span>
+      <span class="safe-pill">✓ Local Authority Partnerships</span>
+      <span class="safe-pill">✓ Regular Reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="section-pad">
+  <div class="cta-inner">
+    <span class="label">Get In Touch</span>
+    <h2 class="heading-xl">Need to refer a<br><em>young person?</em></h2>
+    <p>We respond to every referral quickly and professionally. Our team is ready to help find the right placement and support plan.</p>
+    <div class="cta-btns">
+      <a href="mailto:referrals@i2gether.org.uk" class="btn-primary">Make a Referral</a>
+      <a href="mailto:info@i2gether.org.uk" class="btn-ghost">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">i2<span style="color:var(--gold)">gether</span></a>
+      <p>Supporting young people across Greater Manchester into safe accommodation, independent living, and bright futures.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#">Supported Accommodation</a>
+      <a href="#">Life Skills</a>
+      <a href="#">Personalised Support</a>
+      <a href="#">Pathway to Independence</a>
+    </div>
+    <div class="footer-col">
+      <h4>Organisation</h4>
+      <a href="#">About Us</a>
+      <a href="#">Our Team</a>
+      <a href="#">Safeguarding</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="#">Make a Referral</a>
+      <a href="#">Get in Touch</a>
+      <a href="#">Greater Manchester</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Independent Together. All rights reserved.</span>
+    <span>Registered in England & Wales</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll — turns white on scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── SEAMLESS CROSSFADE VIDEO PLAYLIST ──
+  // Each video plays for EXACTLY 5 seconds then switches
+  // Order: lady stitching → arrow → lady with glasses → repeat
+  const playlist = [
+    'video_lady.mp4',    // 1st — lady sitting teaching shoes
+    'video_arrow.mp4',   // 2nd — guy teaching arrow
+    'video_glasses.mp4'  // 3rd — lady with glasses
+  ];
+
+  const videoA = document.getElementById('videoA');
+  const videoB = document.getElementById('videoB');
+
+  let current = 0;
+  let activeEl = videoA;
+  let hiddenEl = videoB;
+  let switchTimer = null;
+
+  function setSpeed(el) {
+    el.playbackRate = 1.15;
+  }
+
+  function crossfade() {
+    const nextIndex = (current + 1) % playlist.length;
+
+    // Load and play next video on hidden element
+    hiddenEl.src = playlist[nextIndex];
+    hiddenEl.load();
+    hiddenEl.play().then(() => { setSpeed(hiddenEl); }).catch(() => {});
+
+    // Crossfade
+    hiddenEl.style.opacity = '1';
+    hiddenEl.style.zIndex = '1';
+    activeEl.style.opacity = '0';
+    activeEl.style.zIndex = '0';
+
+    setTimeout(() => {
+      activeEl.pause();
+      activeEl.src = '';
+      const temp = activeEl;
+      activeEl = hiddenEl;
+      hiddenEl = temp;
+      current = nextIndex;
+
+      // Schedule NEXT switch exactly 5 seconds from NOW
+      clearTimeout(switchTimer);
+      switchTimer = setTimeout(crossfade, 5000);
+    }, 1200);
+  }
+
+  // Start first video
+  videoA.src = playlist[0];
+  videoA.load();
+  videoA.play().then(() => { setSpeed(videoA); }).catch(() => {});
+
+  // Schedule first switch after exactly 5 seconds
+  switchTimer = setTimeout(crossfade, 5000);
+
+</script>
+</body>
+</html>
